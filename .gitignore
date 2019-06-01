@@ -1,0 +1,17 @@
+
+# Unreal Blueprint.
+.vs/
+/Binaries/
+/Intermediate/
+/Plugins/
+/Saved/Autosaves/
+/Saved/AutoScreenshot.png
+/Saved/Backup/
+/Saved/Collections/
+/Saved/Config/CrashReportClient/
+/Saved/Config/WorldState/
+/Saved/Crashes/
+/Saved/Logs/
+
+
+*.db

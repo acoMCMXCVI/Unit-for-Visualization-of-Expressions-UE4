@@ -6,11 +6,11 @@
 class TunnelData {
 public:
 
-// Root
+	// Root
 
 	int noseroot;
 
-// eyebrow
+	// eyebrow
 
 	int r_eyebrow_out;
 	int r_eyebrow_in;
@@ -18,10 +18,20 @@ public:
 	int l_eyebrow_out;
 	int l_eyebrow_in;
 
+	// eyelid
 
+	float r_eyelid_top;
+	float r_eyelid_down;
+
+	float l_eyelid_top;
+	float l_eyelid_down;
+
+	// nose 
+
+	int r_nose;
+	int l_nose;
 
 
 };
-
 
 #endif

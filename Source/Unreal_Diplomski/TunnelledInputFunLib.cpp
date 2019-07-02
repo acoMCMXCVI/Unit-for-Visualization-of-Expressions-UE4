@@ -115,10 +115,22 @@ void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks)
 		UE_LOG(LogTemp, Error, TEXT("Number of packets = %d"), num_of_packets_in_buffer);
 	}
 
+// EYEBROW
 	tracks.Add(tunnelData.r_eyebrow_out);
 	tracks.Add(tunnelData.r_eyebrow_in);
 	tracks.Add(tunnelData.l_eyebrow_in);
 	tracks.Add(tunnelData.l_eyebrow_out);
+	
+// EYELID
+	tracks.Add(tunnelData.r_eyelid_top);
+	tracks.Add(tunnelData.r_eyelid_down);
+	tracks.Add(tunnelData.l_eyelid_top);
+	tracks.Add(tunnelData.l_eyelid_down);
+
+//	NOSE
+	tracks.Add(tunnelData.r_nose);
+	tracks.Add(tunnelData.l_nose);
+
 
 	//text = FString(UTF8_TO_TCHAR(reciveBuf));
 	//eyebrow_point = FVector(0.0f, 0.0f, tunnelData.r_eyebrow_move);

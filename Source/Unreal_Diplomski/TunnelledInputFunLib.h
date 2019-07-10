@@ -22,6 +22,7 @@ class UNREAL_DIPLOMSKI_API UTunnelledInputFunLib : public UBlueprintFunctionLibr
 	UFUNCTION(BlueprintCallable, Category = "My Functions")
 		static void ConnectToTunnel(bool& connected);
 	UFUNCTION(BlueprintCallable, Category = "My Functions")
-		static void GetTunnelledInput(TArray<float>& tracks);
-
+		static void GetTunnelledInput(TArray<float>& tracks, int& lenght, bool& connected);
+	UFUNCTION(BlueprintCallable, Category = "My Functions")
+		static void CalculationControllesLocation(int i, TArray<float> calibration, TArray<float> old, TArray<float> realtime, float& out, int& counter);
 };

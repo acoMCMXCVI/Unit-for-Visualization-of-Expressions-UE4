@@ -12,6 +12,11 @@
 /Saved/Config/WorldState/
 /Saved/Crashes/
 /Saved/Logs/
+/Build/
+/Saved/StagedBuilds/
+/Saved/EditorCooked/
 
 
 *.db
+*.png
+

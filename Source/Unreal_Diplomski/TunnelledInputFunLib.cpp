@@ -92,10 +92,10 @@ void UTunnelledInputFunLib::ConnectToTunnel(bool& connected)
 }
 
 
-void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks)
+void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks, int& lenght, bool& connected)
 {
 	//UE_LOG(LogTemp, Display, TEXT("GetTunnelledInput"));
-
+	connected = true;
 	u_long bytes_available = -1;
 	int num_of_packets_in_buffer = 0;
 	do {
@@ -103,6 +103,8 @@ void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks)
 		int iResult = recv(ConnectSocket, (char*)&tunnelData, sizeof(tunnelData), 0);
 		if (iResult < 0) {
 			UE_LOG(LogTemp, Error, TEXT("recv failed with error: %d\n"), WSAGetLastError());
+			//ToDo ADD DISCONECT
+			connected = false;
 		}
 
 		ioctlsocket(ConnectSocket, FIONREAD, &bytes_available);
@@ -132,7 +134,53 @@ void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks)
 	tracks.Add(tunnelData.l_nose);
 
 
+// MOUTH
+	tracks.Add(tunnelData.r_lipcorner);
+	tracks.Add(tunnelData.l_lipcorner);
+
+
+//	JAW
+	tracks.Add(tunnelData.jaw);
+
+
+
+	lenght = tracks.Num()-1;
 	//text = FString(UTF8_TO_TCHAR(reciveBuf));
 	//eyebrow_point = FVector(0.0f, 0.0f, tunnelData.r_eyebrow_move);
 
 }
+
+void UTunnelledInputFunLib::CalculationControllesLocation(int i, TArray<float> calibration, TArray<float> old, TArray<float> realtime, float& out, int& counter)
+{
+	
+	counter = i;
+	float tresh = 0.5;
+	float sensitivity=17.0;
+
+	if(0<=i && i<=3)
+		sensitivity = 15.0;
+	else if(4 <= i && i <= 7)
+		sensitivity = 17.0;
+	else if (8 <= i && i <= 9)
+		sensitivity = 8.0;
+	else if (10 <= i && i <= 11)
+		sensitivity = 17.0;
+	else
+		sensitivity = 15.0;
+
+	if (fabs(old[i] - realtime[i]) > tresh) {
+
+		//float x = old[i] - realtime[i];
+		//UE_LOG(LogTemp, Warning, TEXT("nestooooo %f"), x);
+
+
+		old[i] = realtime[i];
+		out = realtime[i] / sensitivity + calibration[i];
+
+	}
+	else {
+		out = old[i]+calibration[i];
+	}
+		
+}
+

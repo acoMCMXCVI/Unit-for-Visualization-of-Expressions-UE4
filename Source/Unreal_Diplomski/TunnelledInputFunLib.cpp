@@ -150,37 +150,71 @@ void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks, int& lenght
 
 }
 
-void UTunnelledInputFunLib::CalculationControllesLocation(int i, TArray<float> calibration, TArray<float> old, TArray<float> realtime, float& out, int& counter)
+void UTunnelledInputFunLib::CalculationControllesLocation(int i, TArray<float> calibration, TArray<float> old1, TArray<float> old2, TArray<float> old3, TArray<float> old4, TArray<float> realtime, float& out, int& counter)
 {
 	
 	counter = i;
-	float tresh = 0.5;
+	float tresh = 0;
 	float sensitivity=17.0;
 
 	if(0<=i && i<=3)
-		sensitivity = 15.0;
+		sensitivity = 15;//15
 	else if(4 <= i && i <= 7)
-		sensitivity = 17.0;
+		sensitivity = 17.0;//17
 	else if (8 <= i && i <= 9)
-		sensitivity = 8.0;
+		sensitivity = 8.0;//8
 	else if (10 <= i && i <= 11)
-		sensitivity = 17.0;
+		sensitivity = 17.0;//17
 	else
-		sensitivity = 15.0;
+		sensitivity = 15.0;//15
+
+	if (fabs(old1[i] - realtime[i]) > tresh) {
+
+		//float x = old[i] - realtime[i];
+		//UE_LOG(LogTemp, Warning, TEXT("nestooooo %f"), x);
+
+		old4[i] = old3[i];
+		old3[i] = old2[i];
+		old2[i] = old1[i];
+		old1[i] = realtime[i];
+		out = (realtime[i] + old4[i] + old3[i] + old2[i] + old1[i]) / 5 / sensitivity * 2 + calibration[i];
+
+	}
+	else {
+		out = old1[i]+calibration[i];
+	}
+		
+}
+
+void UTunnelledInputFunLib::CalculationControllesLocationSimple(int i, TArray<float> calibration, TArray<float> old, TArray<float> realtime, float& out, int& counter)
+{
+
+	counter = i;
+	float tresh = 0.2;
+	float sensitivity = 17.0;
+
+	if (0 <= i && i <= 3)
+		sensitivity = 15;//15
+	else if (4 <= i && i <= 7)
+		sensitivity = 17.0;//17
+	else if (8 <= i && i <= 9)
+		sensitivity = 8.0;//8
+	else if (10 <= i && i <= 11)
+		sensitivity = 17.0;//17
+	else
+		sensitivity = 15.0;//15
 
 	if (fabs(old[i] - realtime[i]) > tresh) {
 
 		//float x = old[i] - realtime[i];
 		//UE_LOG(LogTemp, Warning, TEXT("nestooooo %f"), x);
 
-
 		old[i] = realtime[i];
-		out = realtime[i] / sensitivity + calibration[i];
+		out = realtime[i] / sensitivity  + calibration[i];
 
 	}
 	else {
-		out = old[i]+calibration[i];
+		out = old[i] + calibration[i];
 	}
-		
-}
 
+}

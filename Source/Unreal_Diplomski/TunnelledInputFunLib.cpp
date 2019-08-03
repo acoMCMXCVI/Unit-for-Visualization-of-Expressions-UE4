@@ -135,9 +135,10 @@ void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks, int& lenght
 
 
 // MOUTH
-	tracks.Add(tunnelData.r_lipcorner);
-	tracks.Add(tunnelData.l_lipcorner);
-
+	tracks.Add(tunnelData.r_lipcornerUD);
+	tracks.Add(tunnelData.l_lipcornerUD);
+	tracks.Add(tunnelData.r_lipcornerLR);
+	tracks.Add(tunnelData.l_lipcornerLR);
 
 //	JAW
 	tracks.Add(tunnelData.jaw);
@@ -162,9 +163,9 @@ void UTunnelledInputFunLib::CalculationControllesLocation(int i, TArray<float> c
 	else if(4 <= i && i <= 7)
 		sensitivity = 17.0;//17
 	else if (8 <= i && i <= 9)
-		sensitivity = 8.0;//8
-	else if (10 <= i && i <= 11)
-		sensitivity = 17.0;//17
+		sensitivity = 5.0;//8
+	else if (10 <= i && i <= 13)
+		sensitivity = 20.0;//17
 	else
 		sensitivity = 15.0;//15
 
@@ -200,9 +201,11 @@ void UTunnelledInputFunLib::CalculationControllesLocationSimple(int i, TArray<fl
 	else if (8 <= i && i <= 9)
 		sensitivity = 8.0;//8
 	else if (10 <= i && i <= 11)
-		sensitivity = 17.0;//17
+		sensitivity = 20.0;//17
+	else if (12 <= i && i <= 13)
+		sensitivity = 12.0;//17
 	else
-		sensitivity = 15.0;//15
+		sensitivity = 18.0;//15
 
 	if (fabs(old[i] - realtime[i]) > tresh) {
 

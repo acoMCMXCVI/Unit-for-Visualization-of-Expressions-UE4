@@ -140,6 +140,9 @@ void UTunnelledInputFunLib::GetTunnelledInput(TArray<float>& tracks, int& lenght
 	tracks.Add(tunnelData.r_lipcornerLR);
 	tracks.Add(tunnelData.l_lipcornerLR);
 
+	tracks.Add(tunnelData.r_down_lip);
+	tracks.Add(tunnelData.l_down_lip);
+
 //	JAW
 	tracks.Add(tunnelData.jaw);
 
@@ -203,7 +206,7 @@ void UTunnelledInputFunLib::CalculationControllesLocationSimple(int i, TArray<fl
 	else if (10 <= i && i <= 11)
 		sensitivity = 20.0;//17
 	else if (12 <= i && i <= 13)
-		sensitivity = 12.0;//17
+		sensitivity = 10.0;//17
 	else
 		sensitivity = 18.0;//15
 

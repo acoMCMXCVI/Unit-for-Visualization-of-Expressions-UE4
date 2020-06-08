@@ -24,7 +24,7 @@ The unit obtained input data from the data analysis and processing unit (https:/
 The character that was used is a part of “A boy and his kite” demo which can be found in Unreal store:
 https://www.unrealengine.com/marketplace/en-US/store
 
-## Korišćenje
+## Usage
 
 In order of successfully implementation of the system, it is necessary to install all parts of the system. 
 For all details, feel free to contact me by e-mail:  rajicaleksandar6@gmail.com.
